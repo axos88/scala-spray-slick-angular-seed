@@ -13,6 +13,7 @@ to use this currently you will need to run:
 TODO:
   - write this readme
   - clean up the code
+  - write tests
   - Integrate bower run with sbt
   - Remove necessity to edit requirejs manually(!!)
   - Pipeline:
