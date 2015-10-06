@@ -23,5 +23,6 @@ TODO:
     - serve the frontend from the generated files
   - move to angular 2 when ready
   - move to slick 3.1 when ready
+  - drop schema.create and add support for migrations
 
 
