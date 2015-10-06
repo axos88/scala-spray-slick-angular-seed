@@ -1,0 +1,13 @@
+{
+  "directory": "src/main/webapp/lib",
+  "analytics": false,
+  "timeout": 120000,
+  "registry": {
+    "search": [
+      "https://bower.herokuapp.com"
+    ]
+  },
+  "scripts": {
+    "postinstall": "bower-requirejs -c src/main/webapp/lib/jsconfig.js"
+  }
+}

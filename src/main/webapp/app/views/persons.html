@@ -1,0 +1,24 @@
+<div>
+    <table class="table table-striped table-berdered table-hover">
+        <thead>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>&nbsp;</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>&nbsp;</td>
+                <td><input ng-model="newperson.fname"</td>
+                <td><input ng-model="newperson.lname"</td>
+                <td><button class="btn btn-success glyphicon glyphicon-plus" ng-click="addPerson()"></button></td>
+            </tr>
+            <tr ng-repeat="person in persons">
+                <th>{{person.id}}</th>
+                <td>{{person.fname}}</td>
+                <td>{{person.lname}}</td>
+                <td><button ng-click="deletePerson(person.id)" class="btn btn-danger glyphicon glyphicon-trash"></button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

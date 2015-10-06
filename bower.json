@@ -1,0 +1,20 @@
+{
+  "name": "webformz",
+  "description": "A starter project for Scala & AngularJS",
+  "version": "0.0.0",
+  "homepage": "",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.4.0",
+    "angular-route": "~1.4.0",
+    "angular-loader": "~1.4.0",
+    "angular-mocks": "~1.4.0",
+    "angular-websocket": "",
+    "html5-boilerplate": "~5.2.0",
+    "js-cookie": "",
+    "bootstrap": "",
+    "jquery": "",
+    "requirejs": ""
+  }
+}
