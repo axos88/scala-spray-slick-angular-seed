@@ -4,12 +4,14 @@ define(["angular", "angular-route", "services/websocket"], function(angular) {
     angular.module('webformz.persons', ['ngRoute', 'webformz.websocket', 'webformz.authentication'])
         .config(['$routeProvider', function($routeProvider) {
             $routeProvider.when('/persons', {
-                templateUrl: '/app/views/persons.html',
+                templateUrl: '/assets/webformz/views/persons.html',
                 controller: 'PersonsCtrl'
             })
         }])
 
         .controller('PersonsCtrl', function($rootScope, $scope, $location, $http, WebSocketService) {
+
+            $scope.newperson = { fname: "", lname: ""}
 
             //	if (!AuthenticationService.isLoggedIn())
             //	{

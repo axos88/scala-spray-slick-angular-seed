@@ -5,7 +5,7 @@ define(["angular", "angular-route", 'services/authentication'], function(angular
         .config(['$routeProvider', function($routeProvider) {
             $routeProvider
                 .when('/login', {
-                    templateUrl: '/app/views/login.html',
+                    templateUrl: '/assets/webformz/views/login.html',
                     controller: 'LoginCtrl'
                 })
                 .when("/logout", {

@@ -2,12 +2,18 @@
 
 resolvers += "spray repo" at "http://repo.spray.io"
 
-addSbtPlugin("com.github.mpeltonen" % "sbt-idea" % "1.6.0")
+resolvers += Resolver.typesafeRepo("releases")
 
-addSbtPlugin("com.typesafe.sbt" % "sbt-twirl" % "1.0.4")
+resolvers += "scalaz-bintray" at "https://dl.bintray.com/scalaz/releases"
+
+addSbtPlugin("com.github.mpeltonen" % "sbt-idea" % "1.6.0")
 
 addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.12.0")
 
 addSbtPlugin("io.spray" % "sbt-revolver" % "0.7.2")
 
-addSbtPlugin("org.mdedetrich" %% "sbt-bower" % "0.2.1")
+addSbtPlugin("com.typesafe.sbt" % "sbt-uglify" % "1.0.3")
+
+addSbtPlugin("net.ground5hark.sbt" % "sbt-css-compress" % "0.1.3")
+
+addSbtPlugin("com.typesafe.sbt" % "sbt-web" % "1.2.2")

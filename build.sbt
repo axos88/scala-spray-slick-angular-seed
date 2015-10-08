@@ -1,5 +1,4 @@
-import java.io.File
-import sbtassembly.MergeStrategy
+import WebKeys._
 
 organization := "vandra.hu"
 
@@ -11,14 +10,23 @@ scalaVersion := "2.11.6"
 
 scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8", "-feature")
 
-unmanagedResourceDirectories in Compile <++= baseDirectory { base =>
-    Seq( base / "src/main/webapp" )
-}
-
 resolvers ++= Seq(
   "sonatype releases" at "https://oss.sonatype.org/content/repositories/releases/",
   "typesafe repo" at "http://repo.typesafe.com/typesafe/releases/",
   "spray repo" at "http://repo.spray.io/"
+)
+
+val webJarDependencies = Seq(
+   "org.webjars.bower" % "angular" % "1.4.7"
+  ,"org.webjars.bower" % "angular-route" % "1.4.7"
+  ,"org.webjars.bower" % "angular-loader" % "1.4.7"
+  ,"org.webjars.bower" % "angular-mocks" % "1.4.7"
+  ,"org.webjars.bower" % "angular-websocket" % "1.0.14"
+  ,"org.webjars.bower" % "html5-boilerplate-bower" % "4.3.0"
+//  ,"org.webjars.bower" % "js-cookie" % ""
+  ,"org.webjars.bower" % "bootstrap" % "3.3.5"
+  ,"org.webjars.bower" % "jquery" % "2.1.4"
+  ,"org.webjars.bower" % "requirejs" % "2.1.20"
 )
 
 libraryDependencies ++= Seq(
@@ -33,30 +41,15 @@ libraryDependencies ++= Seq(
   ,"postgresql"              %   "postgresql"                  % "9.1-901.jdbc4"
   ,"com.wandoulabs.akka"     %%  "spray-websocket"             % "0.1.4"
   ,"com.nimbusds"            %   "nimbus-jose-jwt"             % "3.10"
-)
+  ,"org.webjars"             %   "webjars-locator" % "0.28"
+) ++ webJarDependencies
 
 Revolver.settings.settings
 
-bowerSettings
+pipelineStages := Seq(cssCompress, uglify)
 
-BowerKeys.frontendDependencies ++= Seq(
-  "angular" %%% "=1.2.0-rc.2",
-//  "angular-scenario" %%% "=1.2.0-rc.2",
-  "angular-route" %%% "=1.2.0-rc.2",
-//  "angular-mocks" %%% "=1.2.0-rc.2",
-//  "angular-animate" %%% "=1.2.0-rc.2",
-//  "angular-cookies" %%% "=1.2.0-rc.2",
-//  "angular-resource" %%% "=1.2.0-rc.2",
-//  "angular-sanitize" %%% "=1.2.0-rc.2",
-//  "angular-touch" %%% "=1.2.0-rc.2",
-  "requirejs" %%% "=2.1.8"
-//  "requirejs-text" %%% "2.0.10"
-)
+includeFilter in uglify := GlobFilter("*.js")
 
-//BowerKeys.sourceDirectory <<= sourceDirectory (_ / "main" / "webapp" / "lib" )
-//BowerKeys.installDirectory <<=  (sourceDirectory in Bower) (_ / "js" / "myStuffGoesHere")
+lazy val root = (project in file(".")).enablePlugins(SbtWeb)
 
-//update <<= update dependsOn (installTask dependsOn pruneTask)
-
-
-lazy val root = (project in file(".")).enablePlugins(SbtTwirl)
+(managedClasspath in Runtime) += (packageBin in Assets).value

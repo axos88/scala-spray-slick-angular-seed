@@ -29,10 +29,6 @@ define(["angular", "angular-websocket", "helpers/Array"], function(angular) {
 
         function Unsubscribe(subscriber) {
           var index = service.socket.onMessageCallbacks.indexOf(subscriber)
-
-          console.log(index)
-
-
           service.socket.onMessageCallbacks.splice(index, 1)
         }
     }

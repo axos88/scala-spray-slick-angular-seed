@@ -5,21 +5,27 @@ import hu.vandra.webformz.actors.{Push, WebSocketWorker}
 import hu.vandra.webformz.api.Login
 import hu.vandra.webformz.model.{Model, DBConfig, Person}
 import hu.vandra.webformz.helpers._
+import org.webjars.{MultipleMatchesException, WebJarAssetLocator}
 import spray.http.MediaTypes.`text/html`
 import spray.http.StatusCodes
 import spray.routing.AuthenticationFailedRejection.CredentialsMissing
 import spray.routing._
+import scala.collection.JavaConverters._
+
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.language.postfixOps
+import scala.util.{Try, Success, Failure}
 
 trait WebformzService extends WebSocketWorker
     with ActorLogging
     with SessionDirectives
     with HelperDirectives
+    with WebJarSupport
     with RootConfig {
 
   val m: Model
+  val webJarLocator = new WebJarAssetLocator()
 
   val sessionKey = SessionKey(rootConfig.getString("swt.key"))
 
@@ -123,22 +129,22 @@ trait WebformzService extends WebSocketWorker
     } ~
     path("") {
       get {
-        getFromResource("app/index.html")
-      }
-    } ~
-    path("app" / Rest) { path =>
-      get {
-        getFromResource("app/%s" format path)
-      }
-    } ~
-    path("lib" / Rest) { path =>
-      get {
-        getFromResource("lib/%s" format path)
+        getFromWebJar("webformz", "index.html")
       }
     } ~
     path("config") {
       get {
         getFromResource("application.conf")
+      }
+    } ~
+    path("assets" / Segment) { asset =>
+      get {
+        getFromWebJar(asset)
+      }
+    } ~
+    path("assets" / Segment / Rest) { (jar, asset) =>
+      get {
+        getFromWebJar(jar, asset)
       }
     }
   }

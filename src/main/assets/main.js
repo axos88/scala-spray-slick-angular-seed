@@ -1,6 +1,6 @@
 'use strict';
 
-var rs
+var rootScope
 
 require(["angular", "angular-route", "angular-websocket",
          "helpers/Array",
@@ -16,7 +16,7 @@ require(["angular", "angular-route", "angular-websocket",
          $rootScope.auth = authenticationService
          $rootScope.session = sessionService
          $rootScope.WebSocketService = WebSocketService
-         rs = $rootScope
+         rootScope = $rootScope
       })
       .run(function($rootScope, authenticationService) {
          $rootScope.$on('$routeChangeSuccess', function(ev,data) {
